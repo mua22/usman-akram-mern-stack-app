@@ -3,11 +3,12 @@ var express = require("express");
 var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
-
+var mongoose = require("mongoose");
+var winston = require("winston");
 var indexRouter = require("./routes/index");
-var usersRouter = require("./routes/users");
+var usersRouter = require("./routes/api/users");
 var testRouter = require("./routes/api/test");
-
+var config = require("config");
 var app = express();
 
 // view engine setup
@@ -23,7 +24,7 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(express.static(path.join(__dirname, "client/build")));
 // app.use("/", indexRouter);
 app.use("/", testRouter);
-app.use("/users", usersRouter);
+app.use("/", usersRouter);
 
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname + "/client/build/index.html"));
@@ -44,5 +45,23 @@ app.use(function (err, req, res, next) {
   res.status(err.status || 500);
   res.render("error");
 });
+var db = config.get("db");
+mongoose
+  .connect(db, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    socketTimeoutMS: 0,
+    connectionTimeout: 0,
+  })
+  .then(() => {
+    winston.info(`Connected to ${db}...`);
+    // console.clear();
+    console.log(`Connected to ${db}...`);
+  })
+  .catch((err) => {
+    winston.error("DB Connection Error");
+  });
+
+console.log("Environment: " + config.get("myEnvironment"));
 
 module.exports = app;

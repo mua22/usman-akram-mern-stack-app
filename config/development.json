@@ -1,0 +1,5 @@
+{
+  "jwtPrivateKey": "usmanakram",
+  "db": "mongodb://localhost/fullstack",
+  "myEnvironment":"Development " 
+}
