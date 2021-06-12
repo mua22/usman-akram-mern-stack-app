@@ -6,6 +6,8 @@ import LandingPage from "./components/pages/LandingPage";
 import Login from "./components/auth/Login";
 import Register from "./components/auth/Register";
 import Products from "./components/pages/Products";
+import ProductForm from "./components/pages/products/ProductForm";
+import AuthGuard from "./components/auth/AuthGuard";
 function App() {
   return (
     <Router>
@@ -17,8 +19,13 @@ function App() {
           <Route path="/register">
             <Register />
           </Route>
+          <Route path="/products/add">
+            <ProductForm />
+          </Route>
           <Route path="/products">
-            <Products />
+            <AuthGuard>
+              <Products />
+            </AuthGuard>
           </Route>
           <Route path="/">
             <LandingPage />

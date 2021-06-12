@@ -2,6 +2,7 @@ import React from "react";
 import axios from "axios";
 import { useHistory } from "react-router";
 import { ToastContainer, toast } from "react-toastify";
+import apiService from "./../../services/ApiService";
 const Register = () => {
   const history = useHistory();
   const [user, setUser] = React.useState({
@@ -10,7 +11,7 @@ const Register = () => {
     password: "usman",
   });
   const submit = () => {
-    axios
+    apiService
       .post("/api/users", user)
       .then((res) => {
         console.log(res.data);

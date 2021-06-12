@@ -7,6 +7,8 @@ var mongoose = require("mongoose");
 var winston = require("winston");
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/api/users");
+var productsRouter = require("./routes/api/products");
+var authRouter = require("./routes/api/auth");
 var testRouter = require("./routes/api/test");
 var config = require("config");
 var app = express();
@@ -25,6 +27,8 @@ app.use(express.static(path.join(__dirname, "client/build")));
 // app.use("/", indexRouter);
 app.use("/", testRouter);
 app.use("/", usersRouter);
+app.use("/", productsRouter);
+app.use("/", authRouter);
 
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname + "/client/build/index.html"));
@@ -59,6 +63,7 @@ mongoose
     console.log(`Connected to ${db}...`);
   })
   .catch((err) => {
+    console.log(err);
     winston.error("DB Connection Error");
   });
 

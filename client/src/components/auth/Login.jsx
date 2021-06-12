@@ -1,12 +1,27 @@
 import React from "react";
-
+import axios from "axios";
+import { toast } from "react-toastify";
+import apiService from "./../../services/ApiService";
 const Login = () => {
   const [user, setUser] = React.useState({
-    name: "Usman Akram",
     email: "musmanakram@cuilahore.edu.pk",
     password: "usman",
   });
-  const submit = () => {};
+  const submit = () => {
+    apiService
+      .post("/api/auth", user)
+      .then((res) => {
+        toast.success("Logged In");
+        console.log(res.data);
+        localStorage.setItem("token", res.data);
+        window.location.href = "/";
+      })
+      .catch((err) => {
+        console.log(err);
+        if (err.response) toast.error(err.response.data);
+      })
+      .finally(() => {});
+  };
   return (
     <div>
       <h4>Login</h4>
@@ -35,7 +50,7 @@ const Login = () => {
       </div>
       <div className="form-group pt-3">
         <button className="btn btn-info" onClick={submit}>
-          Register
+          Login
         </button>
       </div>
     </div>
