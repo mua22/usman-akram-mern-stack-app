@@ -12,7 +12,7 @@ var authRouter = require("./routes/api/auth");
 var testRouter = require("./routes/api/test");
 var config = require("config");
 var app = express();
-
+const { startCronJobs } = require("./cron-jobs/index");
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
 
@@ -30,6 +30,7 @@ app.use("/", usersRouter);
 app.use("/", productsRouter);
 app.use("/", authRouter);
 
+startCronJobs();
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname + "/client/build/index.html"));
 });
