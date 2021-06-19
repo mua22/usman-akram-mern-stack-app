@@ -34,6 +34,7 @@ const Products = () => {
                 <img src={p.picture} width="100px" />
               </td>
               <td>
+                <button className="btn btn-info">Add To Card</button>
                 <button className="btn btn-warning mr-2" onClick={(e) => {}}>
                   Edit
                 </button>

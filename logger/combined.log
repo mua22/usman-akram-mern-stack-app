@@ -194,3 +194,5 @@
 {"message":"Connected to mongodb://localhost/fullstack...","level":"info"}
 {"message":"Listening on port 5000","level":"info"}
 {"message":"Connected to mongodb://localhost/fullstack...","level":"info"}
+{"message":"Listening on port 5000","level":"info"}
+{"message":"Connected to mongodb://localhost/fullstack...","level":"info"}
