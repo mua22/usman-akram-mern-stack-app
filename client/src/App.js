@@ -8,30 +8,37 @@ import Register from "./components/auth/Register";
 import Products from "./components/pages/Products";
 import ProductForm from "./components/pages/products/ProductForm";
 import AuthGuard from "./components/auth/AuthGuard";
+import Cart from "./components/pages/cart/Cart";
+import { CookiesProvider } from "react-cookie";
 function App() {
   return (
     <Router>
-      <Layout>
-        <Switch>
-          <Route path="/login">
-            <Login />
-          </Route>
-          <Route path="/register">
-            <Register />
-          </Route>
-          <Route path="/products/add">
-            <ProductForm />
-          </Route>
-          <Route path="/products">
-            <AuthGuard>
-              <Products />
-            </AuthGuard>
-          </Route>
-          <Route path="/">
-            <LandingPage />
-          </Route>
-        </Switch>
-      </Layout>
+      <CookiesProvider>
+        <Layout>
+          <Switch>
+            <Route path="/login">
+              <Login />
+            </Route>
+            <Route path="/register">
+              <Register />
+            </Route>
+            <Route path="/cart">
+              <Cart />
+            </Route>
+            <Route path="/products/add">
+              <ProductForm />
+            </Route>
+            <Route path="/products">
+              <AuthGuard>
+                <Products />
+              </AuthGuard>
+            </Route>
+            <Route path="/">
+              <LandingPage />
+            </Route>
+          </Switch>
+        </Layout>
+      </CookiesProvider>
     </Router>
   );
 }

@@ -30,6 +30,11 @@ const MyNavBar = () => {
               Home
             </Link>
           </li>
+          <li className="nav-item active">
+            <Link className="nav-link" to="/cart">
+              Shopping Cart
+            </Link>
+          </li>
           {isLoggedIn && (
             <li className="nav-item active">
               <Link className="nav-link" to="/products">
